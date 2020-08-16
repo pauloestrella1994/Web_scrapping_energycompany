@@ -1,6 +1,6 @@
-#Web Scrapping Energy Company
+# Web Scrapping Energy Company
 
-##Install
+## Install
 In this project, Firefox will be use to start the web scrapping.
 To use Firefox, its necessary to install the geckodriver.
 

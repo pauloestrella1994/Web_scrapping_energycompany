@@ -18,3 +18,6 @@ password.send_keys('Paulo1994')
 
 button = ff.find_element_by_xpath('/html/body/div/div/div/div/form/div/div[2]/div/div[3]/div/button')
 button.click()
+
+relatorios = ff.find_element_by_xpath('/html/body/div/div/div[1]/div/div/div[2]/ul/li[2]/a')
+relatorios.click()

@@ -9,10 +9,10 @@ ff = webdriver.Firefox()
 ff.get(url_login)
 
 username = ff.find_element_by_xpath('/html/body/div/div/div/div/form/div/div[2]/div/div[1]/div[1]/div/input')
-username.send_keys('pauloestrella1994@gmail.com')
+username.send_keys('Testenoenergy@gmail.com')
 
 password = ff.find_element_by_xpath(('/html/body/div/div/div/div/form/div/div[2]/div/div[1]/div[2]/div/input'))
-password.send_keys('Paulo1994')
+password.send_keys('bizin123')
 
 button = ff.find_element_by_xpath('/html/body/div/div/div/div/form/div/div[2]/div/div[3]/div/button')
 button.click()
@@ -47,4 +47,9 @@ page_html = ff.page_source
 
 page_energy = bs(page_html, 'html.parser')
 
-print(page_energy.find_all('th'))
+metadata = page_energy.find_all('th')
+metadata_list = []
+
+for j in metadata:
+    metadata_list.append(j.text)
+

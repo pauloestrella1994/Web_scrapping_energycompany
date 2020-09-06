@@ -4,6 +4,7 @@ venv
 .venv
 .idea
 __pycache__
+
+
 scrapping.py
-/scrapping.py
-./scrapping.py
+

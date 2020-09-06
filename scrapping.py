@@ -1,5 +1,7 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup as bs
+import time
 
 url_login = 'https://www.energycompany.com.br/login'
 
@@ -19,5 +21,13 @@ password.send_keys('Paulo1994')
 button = ff.find_element_by_xpath('/html/body/div/div/div/div/form/div/div[2]/div/div[3]/div/button')
 button.click()
 
+time.sleep(1)
 relatorios = ff.find_element_by_xpath('/html/body/div/div/div[1]/div/div/div[2]/ul/li[2]/a')
 relatorios.click()
+
+estado = ff.find_element_by_id('react-select-3-input')
+estado.send_keys('Paraná')
+estado.send_keys(Keys.ENTER)
+
+search_button = ff.find_element_by_xpath('/html/body/div/div/div[2]/div/div/div/div[9]/div/button[2]')
+search_button.click()

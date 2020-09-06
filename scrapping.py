@@ -8,10 +8,6 @@ url_login = 'https://www.energycompany.com.br/login'
 ff = webdriver.Firefox()
 ff.get(url_login)
 
-page_html = ff.page_source
-
-page_energy = bs(page_html, 'html.parser')
-
 username = ff.find_element_by_xpath('/html/body/div/div/div/div/form/div/div[2]/div/div[1]/div[1]/div/input')
 username.send_keys('pauloestrella1994@gmail.com')
 
@@ -46,4 +42,9 @@ empresas_filtradas = ['Nome Fantasia', 'Categoria CNAE', 'Divisão CNAE', 'Grupo
 for i in empresas_filtradas:
     enterprises_filter_field.send_keys(i)
     enterprises_filter_field.send_keys(Keys.ENTER)
-    time.sleep(0.5)
+
+page_html = ff.page_source
+
+page_energy = bs(page_html, 'html.parser')
+
+print(page_energy.find_all('th'))

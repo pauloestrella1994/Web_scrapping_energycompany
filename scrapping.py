@@ -31,3 +31,8 @@ estado.send_keys(Keys.ENTER)
 
 search_button = ff.find_element_by_xpath('/html/body/div/div/div[2]/div/div/div/div[9]/div/button[2]')
 search_button.click()
+
+time.sleep(2)
+enterprises_filter_field = ff.find_element_by_xpath('/html/body/div/div/div[2]/div/div/div/div[10]/div/div/div/div[2]/div/div[1]/div/div[1]/div[4]/div/input')
+enterprises_filter_field.send_keys('Agente')
+enterprises_filter_field.send_keys(Keys.ENTER)

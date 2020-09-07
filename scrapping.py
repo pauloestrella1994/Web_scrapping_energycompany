@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup as bs
-import time
+import time, csv
 
 url_login = 'https://www.energycompany.com.br/login'
 
@@ -17,7 +17,7 @@ password.send_keys('bizin123')
 button = ff.find_element_by_xpath('/html/body/div/div/div/div/form/div/div[2]/div/div[3]/div/button')
 button.click()
 
-time.sleep(2)
+time.sleep(3)
 busca_cativo = ff.find_element_by_xpath('/html/body/div/div/div[1]/div/div/div[2]/ul/li[3]/a')
 busca_cativo.click()
 
@@ -47,21 +47,26 @@ page_html = ff.page_source
 
 page_energy = bs(page_html, 'html.parser')
 
-metadata = page_energy.find_all('th')
-metadata_list = []
+csv_writer = csv.writer(open('energy_company.csv','w'))
 
-for j in metadata:
-    metadata_list.append(j.text)
+#run loop to extract the table data and store it in csv file
+for tr in page_energy.find_all('tr'):
+    data = []
 
-data = page_energy.find_all('td')
-data_list = []
+    for th in tr.find_all('th'):
+        data.append(th.text)
 
-for k in data and l < len(metadata_list):
-    data_list.append(k.text)
-    l += 1
+    #run to store metadta in csv file
+    if data:
+        print('Inserting headers : {}'.format(','.join(data)))
+        csv_writer.writerow(data)
+        continue
 
+    #run to store data
 
+    for td in tr.find_all('td'):
+        data.append(td.text.strip())
 
-print(metadata_list)
-print(data_list)
-
+    if (data):
+        print("Inserting Table Data:{}".format(','.join(data)))
+        csv_writer.writerow(data)

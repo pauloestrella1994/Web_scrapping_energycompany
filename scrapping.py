@@ -53,3 +53,15 @@ metadata_list = []
 for j in metadata:
     metadata_list.append(j.text)
 
+data = page_energy.find_all('td')
+data_list = []
+
+for k in data and l < len(metadata_list):
+    data_list.append(k.text)
+    l += 1
+
+
+
+print(metadata_list)
+print(data_list)
+

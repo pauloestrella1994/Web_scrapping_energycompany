@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup as bs
 import time, csv
@@ -8,6 +9,9 @@ class EnergyCompany:
     def __init__(self, driver):
         self.driver = driver
         self.url_login = 'https://www.energycompany.com.br/login'
+        self.username_data = str(input("Your email: "))
+        self.password_data = str(input("Your password: "))
+        self.state_data = str(input("Choose what state do you want to crawl: "))
 
     def navigate(self):
         self.driver.get(self.url_login)
@@ -17,21 +21,19 @@ class EnergyCompany:
         password_path = self.driver.find_element_by_xpath(('/html/body/div/div/div/div/form/div/div[2]/div/div[1]/div[2]/div/input'))
         button = self.driver.find_element_by_xpath('/html/body/div/div/div/div/form/div/div[2]/div/div[3]/div/button')
 
-        username_data = str(input('Email: '))
-        password_data = str(input('Password: '))
-        username_path.send_keys(username_data)
-        password_path.send_keys(password_data)
+        username_path.send_keys(self.username_data)
+        password_path.send_keys(self.password_data)
         button.click()
         time.sleep(3)
 
     def busca_cativo(self):
         busca_cativo_button = self.driver.find_element_by_xpath('/html/body/div/div/div[1]/div/div/div[2]/ul/li[3]/a')
         busca_cativo_button.click()
+        time.sleep(3)
 
     def define_state(self):
         state = self.driver.find_element_by_id('react-select-4-input')
-        state_data = str(input('Define which state do you want to import data: '))
-        state.send_keys(state_data)
+        state.send_keys(self.state_data)
         state.send_keys(Keys.ENTER)
 
     def search_button(self):
@@ -83,7 +85,11 @@ class EnergyCompany:
 
 ##----------------Instancias-------------##
 
-browser = webdriver.Firefox()
+#full size screen open
+chrome_options = Options()
+chrome_options.add_argument("--window-size=1080,1080")
+
+browser = webdriver.Chrome(chrome_options=chrome_options)
 start = EnergyCompany(browser)
 start.navigate()
 start.login_data()
